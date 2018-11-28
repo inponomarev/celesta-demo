@@ -10,15 +10,12 @@ import ru.curs.demo.dto.OrderDto;
 import ru.curs.demo.dto.OrderLineDto;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class DocumentService {
-    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
     @CelestaTransaction
     public void postOrder(CallContext context, OrderDto doc) {
         try (OrderHeaderCursor header = new OrderHeaderCursor(context);
