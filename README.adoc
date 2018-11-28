@@ -1,0 +1,90 @@
+= Celesta Demo
+
+This project demonstrates the simple RESTful service based on relational DB using https://github.com/CourseOrchestra/celesta[Celesta] and http://spring.io/projects/spring-boot[Spring Boot].
+
+== Build and Test
+
+To build the project, run `mvn verify`: code for cursor classes will be generated in `target\generated-sources\celesta\...` folder. Then you may run the Spring Boot application in `App` class.
+
+This application exports two REST handlers.
+
+* 'Save an order to database' by sending `PUT` method to `http://localhost:8080/api/save` with the following content:
+
+```json
+{
+	"id": "no1",
+	"date": "2017-01-02",
+	"customerId": "CUST1",
+	"customerName": "John Doe",
+	"lines": [{
+			"itemId": "A",
+			"qty": 5
+		},
+		{
+			"itemId": "B",
+			"qty": 4
+		}
+	]
+}
+```
+* 'Obtain the totals report' by sending GET to `http://localhost:8080/api/report`, and receive something like
+this:
+
+```json
+{
+   "A": 10,
+   "B": 8
+}
+```
+
+== Database Structure
+
+Database definition file is https://github.com/inponomarev/celesta-demo/blob/master/src/main/resources/score/ru/curs/demo/demo.sql[demo.sql].
+
+You can try to modify it and re-run the application on non-empty database (see below how to connect to PostgreSQL) to test the automatic migration facility.
+
+== Unit tests
+
+See how service layer is tested in https://github.com/inponomarev/celesta-demo/blob/master/src/test/java/ru/curs/demo/service/DocumentServiceTest.java[`DocumentServiceTest`].
+
+The test class is annotated with `@CelestaTest`, and each test method has `CallContext` parameter. Behind the scenes
+Celesta runs with in-memory H2 database and the correct CallContext is provided for your tests.
+
+== Using 'real' database connection
+
+This application by default runs on H2-in-memory DB.
+
+You may try to use any other RDBMS supported by Celesta, e. g. PostgreSQL. In order to do this, first create an empty database on your server (e. g. named
+`celesta`).
+
+Database connection is set in https://github.com/inponomarev/celesta-demo/blob/master/src/main/resources/application.yml[application.yml] file. Instead of
+
+```yaml
+celesta:
+  h2:
+    inMemory: true
+```
+
+you may write
+
+```yaml
+celesta:
+  jdbc:
+    url: jdbc:postgresql://127.0.0.1:5432/celesta
+    username: <your_username>
+    password: <your_password>
+```
+
+(see https://courseorchestra.github.io/celesta/#basic_settings_section[Celesta documentation] for complete Celesta options
+reference).
+
+To start the application with connection to PostgreSQL you will also need PostgreSQL JDBC driver, which you can
+simply add to dependencies:
+
+```xml
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.4</version>
+</dependency>
+```
