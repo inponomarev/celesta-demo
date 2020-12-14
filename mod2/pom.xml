@@ -23,7 +23,7 @@
                 <configuration>
                     <testScores>
                         <score>
-                            <path>mod2/nonstandard-test</path>
+                            <path>${project.basedir}/nonstandard-test</path>
                         </score>
                     </testScores>
                 </configuration>

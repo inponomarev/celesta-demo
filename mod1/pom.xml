@@ -22,7 +22,7 @@
                 <configuration>
                     <scores>
                         <score>
-                            <path>mod1/nonstandard</path>
+                            <path>${project.basedir}/nonstandard</path>
                         </score>
                     </scores>
                 </configuration>
