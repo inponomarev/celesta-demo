@@ -48,12 +48,12 @@ public class DocumentServiceTest {
         assertEquals(doc.getId(), header.getId());
 
         OrderLineCursor line = new OrderLineCursor(context);
-        line.setRange("order_id", doc.getId());
+        line.setRange(line.COLUMNS.order_id(), doc.getId());
         assertEquals(2, line.count());
     }
 
     @Test
-    void reportReturnsAggregatedQuantities(CallContext context) {
+     void reportReturnsAggregatedQuantities(CallContext context) {
         srv.postOrder(context, getBrownOrder());
         srv.postOrder(context, getPinkOrder());
         Map<String, Integer> result = srv.getAggregateReport(context);
