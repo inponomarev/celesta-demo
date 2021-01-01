@@ -1,3 +1,5 @@
+image::https://github.com/inponomarev/celesta-demo/workflows/build/badge.svg[link="https://github.com/inponomarev/celesta-demo/actions?query=workflow%3Abuild",tible="build"]
+
 = Celesta Demo
 
 This project demonstrates the simple RESTful service based on relational DB using https://github.com/CourseOrchestra/celesta[Celesta] and http://spring.io/projects/spring-boot[Spring Boot].
