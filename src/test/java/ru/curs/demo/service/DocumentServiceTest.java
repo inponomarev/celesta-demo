@@ -14,28 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ru.curs.demo.TestData.getBrownOrder;
+import static ru.curs.demo.TestData.getPinkOrder;
 
 @CelestaTest
 public class DocumentServiceTest {
 
     DocumentService srv = new DocumentService();
 
-    private OrderDto getBrownOrder() {
-        OrderDto doc = new OrderDto();
-        List<OrderLineDto> lines = new ArrayList<>();
-        lines.add(new OrderLineDto().setItemId("A").setQty(5));
-        lines.add(new OrderLineDto().setItemId("B").setQty(3));
-        doc.setId("no1").setDate(LocalDate.now()).setCustomerId("Brown").setLines(lines);
-        return doc;
-    }
 
-    private OrderDto getPinkOrder() {
-        OrderDto doc = new OrderDto();
-        List<OrderLineDto> lines = new ArrayList<>();
-        lines.add(new OrderLineDto().setItemId("B").setQty(4));
-        doc.setId("no2").setDate(LocalDate.now()).setCustomerId("Pink").setLines(lines);
-        return doc;
-    }
 
     @Test
     void documentIsPutToDb(CallContext context) {
@@ -48,7 +35,7 @@ public class DocumentServiceTest {
         assertEquals(doc.getId(), header.getId());
 
         OrderLineCursor line = new OrderLineCursor(context);
-        line.setRange("order_id", doc.getId());
+        line.setRange(line.COLUMNS.order_id(), doc.getId());
         assertEquals(2, line.count());
     }
 
