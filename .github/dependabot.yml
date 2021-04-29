@@ -1,0 +1,36 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ru.curs:celesta-maven-plugin
+    versions:
+    - 7.3.31
+    - 7.3.32
+    - 7.3.33
+    - 7.3.34
+    - 7.3.35
+    - 7.3.40
+  - dependency-name: ru.curs:celesta-unit
+    versions:
+    - 7.3.31
+    - 7.3.32
+    - 7.3.33
+    - 7.3.34
+    - 7.3.35
+    - 7.3.40
+  - dependency-name: ru.curs:celesta-system-services
+    versions:
+    - 7.3.31
+    - 7.3.32
+    - 7.3.33
+    - 7.3.34
+    - 7.3.35
+    - 7.3.40
+  - dependency-name: ru.curs:spring-boot-starter-celesta
+    versions:
+    - 2.1.40
+    - 2.1.41
