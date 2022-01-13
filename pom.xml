@@ -24,7 +24,7 @@
         <spring.boot.starter.celesta.version>2.1.44</spring.boot.starter.celesta.version>
         <celesta.version>7.3.48</celesta.version>
         <!-- plugins -->
-        <maven-compiller-plugin.version>3.8.1</maven-compiller-plugin.version>
+        <maven-compiller-plugin.version>3.9.0</maven-compiller-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 
